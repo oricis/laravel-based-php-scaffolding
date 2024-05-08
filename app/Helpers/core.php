@@ -12,6 +12,17 @@ use App\Exceptions\FileNotFoundException;
  *
  */
 
+$funcName = 'asset';
+if (!function_exists($funcName)) {
+    function asset(string $path): string
+    {
+		return './' . $path;
+	}
+} else {
+    echo 'ERR: function "' . $funcName . '" already defined!';
+    die();
+}
+
 $funcName = 'config';
 if (!function_exists($funcName)) {
     function config(string $fileAndKey, mixed $default = null): mixed
