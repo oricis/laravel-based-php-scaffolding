@@ -1,6 +1,7 @@
 <?php
 
-use App\Helpers\Common\Arrays\ArrContent;
+declare(strict_types=1);
+
 
 define('APP_START', microtime(true));
 
@@ -42,6 +43,4 @@ if (env('APP_ENV') === 'maintenance') {
 |
 */
 
-dump('<h1>PHP ' . phpversion() . '</h1>');
-dump('<h3>Starting app: ' . env('APP_NAME') . '</h3>');
-dump('<hr><p>My name is: '. config('app.my_name_is', 'John Doe') . '</p>');
+require_once dirname(__DIR__) . '/resources/views/app.php';
