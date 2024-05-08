@@ -39,6 +39,21 @@ if (env('APP_ENV') === 'maintenance') {
 
 /*
 |--------------------------------------------------------------------------
+| Set Errors Reporting
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+if (env('APP_ENV') !== 'production') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
+// To check apache errors log: sudo tail /var/log/apache2/error.log
+
+/*
+|--------------------------------------------------------------------------
 | Run The Application
 |--------------------------------------------------------------------------
 |
