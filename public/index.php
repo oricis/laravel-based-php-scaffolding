@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 
 define('APP_START', microtime(true));
+define('BASE_PATH', dirname(__DIR__) . '/');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ define('APP_START', microtime(true));
 |
 */
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once BASE_PATH . 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 */
 
 if (env('APP_ENV') === 'maintenance') {
-    if (file_exists($maintenance = __DIR__.'/../storage/maintenance.php')) {
+    if (file_exists($maintenance = BASE_PATH . 'storage/maintenance.php')) {
         require $maintenance;
     }
 
@@ -43,4 +45,4 @@ if (env('APP_ENV') === 'maintenance') {
 |
 */
 
-require_once dirname(__DIR__) . '/resources/views/app.php';
+require_once BASE_PATH . 'resources/views/app.php';

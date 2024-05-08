@@ -22,7 +22,7 @@ if (!function_exists($funcName)) {
             dd('Empty or wrong file and key');
         }
 
-		$filepath = __DIR__ . '/../../config/'
+		$filepath = BASE_PATH . 'config/'
 			. substr($fileAndKey, 0, strpos($fileAndKey, '.')) . '.php';
         if (!file_exists($filepath)) {
             dd('File not found: ' . $filepath);
@@ -94,7 +94,7 @@ $funcName = 'env';
 if (! function_exists($funcName)) {
     function env(string $key, mixed $default = null): string
     {
-		$filepath = __DIR__ . '/../../.env';
+		$filepath = BASE_PATH . '.env';
 		$key = trim(strtoupper($key));
 
         if (!is_file($filepath) || !is_readable($filepath)) {
