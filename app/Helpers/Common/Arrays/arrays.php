@@ -50,6 +50,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'reindexArr';
 if (!function_exists($funcName)) {
+    /**
+     * @return array<int, mixed>
+     */
     function reindexArr(array $arr): array
     {
         return ($arr === [])
@@ -58,5 +61,23 @@ if (!function_exists($funcName)) {
                 range(0, count($arr) - 1),
                 array_values($arr)
             );
+    }
+}
+
+$funcName = 'removeArrEmpties';
+if (!function_exists($funcName)) {
+    /**
+     * @return array<int, mixed>
+     */
+    function removeArrEmpties(
+        array $arr,
+        bool $reindex = true
+    ): array
+    {
+        $filteredArr = array_filter($arr, function ($value) {
+            return (!is_null($value) && strlen($value));
+        });
+
+        return ($reindex) ? reindexArr($filteredArr): $filteredArr;
     }
 }
