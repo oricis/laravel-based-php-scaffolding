@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class FileReadException extends Exception
+final class RequiredDataException extends Exception
 {
 
     public function __construct(
-        string $message = 'Error de lectura de fichero',
+        string $message = 'Faltan datos requeridos',
         int $code = 0
     )
     {

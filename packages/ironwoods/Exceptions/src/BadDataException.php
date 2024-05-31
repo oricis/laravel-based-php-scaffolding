@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class NotBetweenException extends Exception
+final class BadDataException extends Exception
 {
 
     public function __construct(
-        string $message = 'El valor|string no es un candidato válido',
+        string $message = 'Unexpected data type',
         int $code = 0
     )
     {

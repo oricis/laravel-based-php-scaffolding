@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class ExpectedTypeException extends Exception
+final class FileNotFoundException extends Exception
 {
 
     public function __construct(
-        string $message = 'El tipo de dato no es el esperado',
+        string $message = 'Fichero NO encontrado',
         int $code = 0
     )
     {

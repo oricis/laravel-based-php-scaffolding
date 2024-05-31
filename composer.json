@@ -14,7 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Ironwoods\\Exceptions\\": "packages/ironwoods/Exceptions/src/"
         },
         "files": [
             "app/Helpers/loader.php"

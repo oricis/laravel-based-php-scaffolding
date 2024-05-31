@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Common;
 
-use App\Exceptions\FileNotFoundException;
-use App\Exceptions\FileReadException;
+use Ironwoods\Exceptions\FileNotFoundException;
+use Ironwoods\Exceptions\FileReadException;
 
 final class DataReaderService
 {

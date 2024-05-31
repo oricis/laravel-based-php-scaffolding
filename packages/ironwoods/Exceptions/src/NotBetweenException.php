@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class RequiredDataException extends Exception
+final class NotBetweenException extends Exception
 {
 
     public function __construct(
-        string $message = 'Faltan datos requeridos',
+        string $message = 'El valor|string no es un candidato válido',
         int $code = 0
     )
     {

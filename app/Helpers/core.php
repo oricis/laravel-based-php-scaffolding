@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\FileNotFoundException;
+use Ironwoods\Exceptions\FileNotFoundException;
 
 /**
  * DON'T DELETE or MODIFY !
