@@ -17,7 +17,7 @@ if (!function_exists($funcName)) {
     {
         $dateTime = date('d-m-Y - h:m:s');
 
-        return $dateTime . ' - ' . (APP_NAME ?? '')
+        return $dateTime . defined('APP_NAME') ? (' - ' . APP_NAME) : ''
             . '<br>File: ' . $exception->getFile() . PHP_EOL
             . ' / Line: ' . $exception->getLine() . PHP_EOL
             . '<br>Exception: ' . $exception->getMessage();
