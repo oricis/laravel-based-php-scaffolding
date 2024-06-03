@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class RequireActionException extends Exception
+final class ExpectedReturnException extends Exception
 {
 
     public function __construct(
-        string $message = 'Acción requerida NO completada',
+        string $message = 'Retorno inesperado',
         int $code = 0
     )
     {

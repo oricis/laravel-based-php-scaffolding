@@ -1,0 +1,30 @@
+{
+    "name": "ironwoods/exceptions",
+    "description": "PHP exceptions collection",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "authors": [
+        {
+            "name": "Moisés Alcocer",
+            "homepage": "https://www.ironwoods.es"
+        }
+    ]
+}

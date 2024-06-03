@@ -14,10 +14,13 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Ironwoods\\": "packages/ironwoods/",
+            "Ironwoods\\Exceptions\\": "packages/ironwoods/Exceptions/src/"
         },
         "files": [
-            "app/Helpers/loader.php"
+            "app/Helpers/loader.php",
+            "packages/ironwoods/Helpers/loader.php"
         ]
     },
     "autoload-dev": {

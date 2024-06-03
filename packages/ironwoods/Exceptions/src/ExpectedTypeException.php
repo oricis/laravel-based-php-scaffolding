@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class BadDataException extends Exception
+final class ExpectedTypeException extends Exception
 {
 
     public function __construct(
-        string $message = 'Unexpected data type',
+        string $message = 'El tipo de dato no es el esperado',
         int $code = 0
     )
     {

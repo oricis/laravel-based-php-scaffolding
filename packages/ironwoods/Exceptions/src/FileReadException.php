@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions;
+namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class FileNotFoundException extends Exception
+final class FileReadException extends Exception
 {
 
     public function __construct(
-        string $message = 'Fichero NO encontrado',
+        string $message = 'Error de lectura de fichero',
         int $code = 0
     )
     {
