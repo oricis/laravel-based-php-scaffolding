@@ -36,9 +36,11 @@ if (!function_exists('loadClasses')) {
     }
 }
 
-$basePath = dirname(__DIR__, 2) . '/packages/ironwoods/';
+if (! isset($basePath)) {
+    $basePath = dirname(__DIR__, 2) . '/';
+}
 
 dump('HACK: alternative-loader.php > basePath: ' . $basePath);
-loadClasses($basePath . 'Exceptions/src/');
-loadClasses($basePath . 'Services/Array/');
-loadClasses($basePath . 'Services/File/');
+loadClasses($basePath . 'packages/ironwoods/Exceptions/src/');
+loadClasses($basePath . 'packages/ironwoods/Services/Array/');
+loadClasses($basePath . 'packages/ironwoods/Services/File/');

@@ -43,6 +43,8 @@ Example:
 To ***load without Composer*** add the next require on the top of your entry
 file (assuming that the entry file is "public/index.php"):
 
+    require_once dirname(__DIR__) . '/packages/ironwoods/alternative-loader.php';
+
 ***
 
 Copyright (c) Moisés Alcocer, 2024. https://www.ironwoods.es
