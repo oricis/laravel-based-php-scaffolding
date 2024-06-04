@@ -47,6 +47,11 @@ $funcName = 'logger';
 if (!function_exists($funcName)) {
 	function logger(string $message, string $level = 'warn'): void
 	{
+		if (! defined('LOGS_STORAGE')) {
+			define('LOGS_STORAGE', null);
+			return;
+		}
+
 		$level = trim(strtoupper($level));
 		if ($level === 'WARN') {
 			$level = 'WARNING';
@@ -54,9 +59,9 @@ if (!function_exists($funcName)) {
 		$message = $level . ': ' . $message;
 		$dateTime = date('d-m-Y - h:m:s');
 		$today = date('d_m_Y');
-		$path = dirname(__DIR__, 1) . '/storage/logs/' . $today . '.md';
+
 		file_put_contents(
-			$path,
+			LOGS_STORAGE . $today . '.md',
 			$dateTime . ' > ' . $message . PHP_EOL,
 			FILE_APPEND
 		);

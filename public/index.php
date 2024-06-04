@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 
 define('APP_START', microtime(true));
-define('BASE_PATH', dirname(__DIR__) . '/');
+define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define('LOGS_STORAGE', BASE_PATH . 'storage/logs/');
 
 
 /*
@@ -34,6 +35,8 @@ require_once BASE_PATH . 'packages/ironwoods/alternative-loader.php';
 */
 
 if (env('APP_ENV') === 'maintenance') {
+    logger('maintenance activated!');
+
     if (file_exists($maintenance = BASE_PATH . 'storage/maintenance.php')) {
         require $maintenance;
     }
@@ -65,4 +68,5 @@ if (env('APP_ENV') !== 'production') {
 |
 */
 
+logger('starting app...', 'notice');
 require_once BASE_PATH . 'resources/views/app.php';
