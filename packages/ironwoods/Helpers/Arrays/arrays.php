@@ -67,6 +67,7 @@ if (!function_exists($funcName)) {
 $funcName = 'removeArrEmpties';
 if (!function_exists($funcName)) {
     /**
+     * @param array<int, null|integer|float|string|object> $arr
      * @return array<int, mixed>
      */
     function removeArrEmpties(
@@ -75,7 +76,10 @@ if (!function_exists($funcName)) {
     ): array
     {
         $filteredArr = array_filter($arr, function ($value) {
-            return (!is_null($value) && strlen($value));
+            return ((is_numeric($value)
+                || is_string($value)
+                || is_object($value)
+                ) && $value);
         });
 
         return ($reindex) ? reindexArr($filteredArr): $filteredArr;
