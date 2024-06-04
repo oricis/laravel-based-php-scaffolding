@@ -19,11 +19,11 @@ define('BASE_PATH', dirname(__DIR__) . '/');
 */
 
 // Load with Composer:
-require_once BASE_PATH . 'vendor/autoload.php';
+// require_once BASE_PATH . 'vendor/autoload.php';
 
 // Load with requires
-// require_once BASE_PATH . 'app/Helpers/loader.php';
-// require_once BASE_PATH . 'packages/ironwoods/alternative-loader.php';
+require_once BASE_PATH . 'app/Helpers/loader.php';
+require_once BASE_PATH . 'packages/ironwoods/alternative-loader.php';
 
 /*
 |--------------------------------------------------------------------------

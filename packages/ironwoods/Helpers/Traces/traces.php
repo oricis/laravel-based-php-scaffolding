@@ -63,36 +63,6 @@ if (!function_exists($funcName)) {
 	}
 }
 
-function test(string $testFile): void
-{
-	require_once($testFile);
-
-	$testClass = str_replace('.php', '', $testFile);
-	$testClass = str_replace('/', '\\', $testClass);
-
-	if (class_exists($testClass)) {
-		new $testClass;
-	}
-}
-
-function traceRemain(string $callFrom = ''): void
-{
-	echo '<hr>';
-	if ($callFrom) {
-		dump($callFrom);
-	}
-	dump('HACK: session trace ! <br>');
-	dump($_SESSION['remain_buy']['quantity'] ?? 'NO remain buy quantity');
-	dump($_SESSION['remain_buy']['date'] ?? 'NO remain buy date');
-	dump($_SESSION['remain_buy']['cost'] ?? 'NO remain buy cost');
-	dump('<hr>');
-	dump($_SESSION['remain_sell']['quantity'] ?? 'NO remain sell quantity');
-	dump($_SESSION['remain_sell']['date'] ?? 'NO remain sell date');
-	dump($_SESSION['remain_sell']['cost'] ?? 'NO remain sell cost');
-	echo '<hr>';
-}
-
-
 $funcName = 'warn';
 if (!function_exists($funcName)) {
 	function warn(string $message): void
