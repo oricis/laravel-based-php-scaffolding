@@ -33,6 +33,17 @@ you have your PHP projects, in my case I use:
 By convenience, you can now rename your project directory and
 [create a virtual host](https://github.com/oricis/notes/blob/master/contents/lamp/lamp-settings.md#create-virtual-hosts).
 
+## Run checks/tests
+
+Check code with PHPStan (app & public on max level):
+
+    ./vendor/bin/phpstan analyze --level 9 public app
+
+To run the unitary tests use:
+
+    vendor/bin/phpunit tests/Unit/Services/ChocoBilly --color
+    vendor/bin/phpunit tests/Unit/Services/DnaChocobos --color
+
 ***
 
 #### [See the app docs here)](./docs/main.md)
