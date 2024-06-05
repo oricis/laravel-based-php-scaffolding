@@ -1,0 +1,6 @@
+parameters:
+    ignoreErrors:
+        - '#Function dump invoked with [0-9]+ parameter, 0 required.#'
+        - '#Function dd invoked with [0-9]+ parameter, 0 required.#'
+        - '#Function dump invoked with [0-9]+ parameters, 0 required.#'
+        - '#Function dd invoked with [0-9]+ parameters, 0 required.#'
