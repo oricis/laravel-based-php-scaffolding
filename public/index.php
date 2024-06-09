@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-
-define('APP_START', microtime(true));
-define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
-define('LOGS_STORAGE', BASE_PATH . 'storage/logs/');
+require_once dirname(__DIR__) . '/config/init.php';
 
 
 /*
