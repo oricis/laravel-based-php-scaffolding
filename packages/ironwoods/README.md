@@ -47,4 +47,63 @@ file (assuming that the entry file is "public/index.php"):
 
 ***
 
+## Files tree
+
+    ironwoods/
+      ├─ Exceptions/
+      │  ├─ LICENSE
+      │  ├─ README.md
+      │  ├─ composer.json
+      │  ├─ src/
+      │  │  ├─ BadDataException.php
+      │  │  ├─ ExpectedReturnException.php
+      │  │  ├─ ExpectedTypeException.php
+      │  │  ├─ FileNotFoundException.php
+      │  │  ├─ FileReadException.php
+      │  │  ├─ NotBetweenException.php
+      │  │  ├─ RequireActionException.php
+      │  │  └─ RequiredDataException.php
+      │  └─ tests/
+      ├─ Helpers/
+      │  ├─ .gitignore
+      │  ├─ Arrays/
+      │  │  └─ arrays.php
+      │  ├─ Dates/
+      │  │  └─ dates.php
+      │  ├─ Files/
+      │  │  └─ files.php
+      │  ├─ LICENSE
+      │  ├─ README.md
+      │  ├─ Strings/
+      │  │  └─ strings.php
+      │  ├─ Traces/
+      │  │  ├─ core.php
+      │  │  └─ traces.php
+      │  ├─ composer.json
+      │  ├─ composer.lock
+      │  ├─ loader.php
+      │  ├─ mix.php
+      │  └─ tests/
+      │     └─ Unit/
+      │        └─ Traces/
+      │           ├─ CoreTest.php
+      │           └─ TracesTest.php
+      ├─ README.md
+      ├─ Services/
+      │  ├─ Array/
+      │  │  ├─ ArrCastService.php
+      │  │  └─ ArrTransformerService.php
+      │  ├─ File/
+      │  │  ├─ DataReaderService.php
+      │  │  └─ DataWriterService.php
+      │  ├─ LICENSE
+      │  ├─ README.md
+      │  ├─ composer.json
+      │  └─ tests/
+      │     ├─ Array
+      │     └─ File
+      └─ alternative-loader.php
+
+***
+
 Copyright (c) Moisés Alcocer, 2024. https://www.ironwoods.es

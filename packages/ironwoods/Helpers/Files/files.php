@@ -60,3 +60,19 @@ if (!function_exists($funcName)) {
         return $flag;
     }
 }
+
+$funcName = 'removeFiles';
+if (!function_exists($funcName)) {
+    function removeFiles(string $path): bool
+    {
+        if ($logFiles = getFilePaths($path)) {
+            foreach ($logFiles as $path) {
+                if (!unlink($path)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
