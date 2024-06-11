@@ -7,7 +7,7 @@ $funcName = 'getLastSlice';
 if (!function_exists($funcName)) {
     function getLastSlice(string $str = '', string $separator = '/'): string
     {
-        $slices = explode($separator, $str);
+        $slices = explode($separator ? $separator : '/', $str);
 
         return $slices[count($slices) - 1];
     }
@@ -50,26 +50,48 @@ if (!function_exists($func)) {
             'n',
         ];
         try {
-            $str = trim($str);
+            $output = trim($str);
             foreach ($arrInputGroups as $key => $inputChars) {
-                $inputChars = explode(',', $inputChars);
-                $str = str_replace($inputChars, $arrReplaces[$key], $str);
+                $output = str_replace(
+                    mb_str_split($inputChars, 1),
+                    $arrReplaces[$key],
+                    $output
+                );
             }
-
-            return $str;
         } catch (\Exception $e) {
             error(getExceptionStr($e));
         }
 
-        return null;
+        return $output ?? null;
     }
 }
 
 $funcName = 'prepareStr';
 if (!function_exists($funcName)) {
-    function prepareStr(array $arrStrs, string $separator = ','): string
+    /**
+     * @param array<int, string|int> $arrStrsOrIds
+     */
+    function prepareStr(array $arrStrsOrIds, string $separator = ','): string
     {
-        return implode($separator, $arrStrs);
+        return implode($separator ? $separator : ',', $arrStrsOrIds);
+    }
+}
+
+$func = 'random';
+if (!function_exists($func)) {
+    function random(int $length = 12, string $chars = ''): string
+    {
+        $chars = ($chars)
+            ? $chars
+            : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charsLength = strlen($chars);
+
+        $output = '';
+        for ($i = 0; $i < $length; $i++) {
+            $output .= $chars[random_int(0, $charsLength - 1)];
+        }
+
+        return $output;
     }
 }
 
@@ -77,7 +99,21 @@ $func = 'slugify';
 if (!function_exists($func)) {
     function slugify(string $str, string $char = '-'): string
     {
-        return str_replace(' ', $char, normalizeChars($str) ?? '');
+        $reservedChars = '[]{}#:@/¿?!¡=&+$,;';
+
+        $output = str_replace(
+            mb_str_split($reservedChars, 1),
+            $char,
+            str_replace(
+                ' ',
+                $char,
+                normalizeChars($str) ?? ''
+            )
+        );
+
+        return ($output[strlen($output) - 1] === '-')
+            ? substr($output, 0, strlen($output) - 1)
+            : $output;
     }
 }
 
@@ -92,6 +128,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'str_contains_some'; // NOTE: before PHP8+
 if (!function_exists($funcName)) {
+    /**
+     * @param array<int, string> $needles
+     */
     function str_contains_some(string $haystack, array $needles): bool
     {
         foreach ($needles as $needle) {
