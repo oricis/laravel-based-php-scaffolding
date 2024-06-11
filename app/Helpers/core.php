@@ -84,23 +84,3 @@ if (! function_exists($funcName)) {
     echo 'ERR: function "' . $funcName . '" already defined!';
     die();
 }
-
-$funcName = 'resources_path';
-if (! function_exists($funcName)) {
-    function resources_path(): string
-    {
-        return BASE_PATH . 'resources/';
-    }
-} else {
-    echo 'ERR: function "' . $funcName . '" already defined!';
-}
-
-$funcName = 'storage_path';
-if (! function_exists($funcName)) {
-    function storage_path(): string
-    {
-        return BASE_PATH . 'storage/';
-    }
-} else {
-    echo 'ERR: function "' . $funcName . '" already defined!';
-}

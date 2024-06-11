@@ -1,5 +1,19 @@
 # App docs
 
+## Available helpers
+
+- asset(string $path): string
+- config(string $key, mixed $default = null):? string
+- env(string $key, mixed $default = null):? string
+
+### Get application paths
+
+- app_path(): string
+- base_path(): string
+- config_path(): string
+- public_path(): string
+- resources_path(): string
+- storage_path(): string
 
 
 ## Files tree

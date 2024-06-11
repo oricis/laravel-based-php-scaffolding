@@ -36,9 +36,9 @@ if (!function_exists('loadClasses')) {
     }
 }
 
-if (! isset($basePath)) {
-    $basePath = dirname(__DIR__, 2) . '/';
-}
+$basePath = (function_exists('base_path'))
+    ? base_path()
+    : dirname(__DIR__, 2) . '/';
 
 dump('HACK: alternative-loader.php > basePath: ' . $basePath);
 loadClasses($basePath . 'packages/ironwoods/Exceptions/src/');
