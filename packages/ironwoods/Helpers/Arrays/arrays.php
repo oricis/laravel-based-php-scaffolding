@@ -138,7 +138,7 @@ if (!function_exists($funcName)) {
 $funcName = 'removeArrayEmpties';
 if (!function_exists($funcName)) {
     /**
-     * @param array<int, null|integer|float|string|object> $arr
+     * @param array<int, null|integer|float|string|object|array<int|string, mixed>> $arr
      * @return array<int, mixed>
      */
     function removeArrayEmpties(

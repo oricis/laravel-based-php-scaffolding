@@ -20,6 +20,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'dump';
 if (!function_exists($funcName)) {
+    /**
+     * @param array<int|string, mixed> $arr
+     */
     function dumpArr(array $arr, int $indentation = 4): void
     {
         if (empty($arr)) {
@@ -99,7 +102,7 @@ if (!function_exists($funcName)) {
 
 $funcName = 'getLineBreak';
 if (!function_exists($funcName)) {
-    function getLineBreak()
+    function getLineBreak(): string
     {
         return (php_sapi_name() === 'cli')
             ? PHP_EOL

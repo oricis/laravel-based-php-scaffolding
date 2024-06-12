@@ -5,6 +5,9 @@ declare(strict_types=1);
 
 $funcName = 'getFilePaths';
 if (!function_exists($funcName)) {
+    /**
+     * @return array<int, string>
+     */
     function getFilePaths(
         string $directoryPath,
         string $fileExtension = 'php',
@@ -47,6 +50,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'existsDirectories';
 if (!function_exists($funcName)) {
+    /**
+     * @param array<int, string> $directoryPaths
+     */
     function existsDirectories(array $directoryPaths): bool
     {
         $flag = true;

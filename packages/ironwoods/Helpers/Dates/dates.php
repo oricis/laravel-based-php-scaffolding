@@ -7,7 +7,7 @@ $funcName = 'getYearFromDate';
 if (!function_exists($funcName)) {
     function getYearFromDate(string $date, string $separator = '-'): int
     {
-        $slices = explode($separator, $date);
+        $slices = explode($separator ? $separator : '-', $date);
         foreach ($slices as $slice) {
             if (strlen($slice) === 4) {
                 return (int) $slice;

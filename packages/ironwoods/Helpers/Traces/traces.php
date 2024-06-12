@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 $funcName = 'error';
 if (!function_exists($funcName)) {
-    function error(string $message, $data = null): void
+    function error(string $message, mixed $data = null): void
     {
         dd('<p class="b cred">' . $message . '</p>', $data);
     }
@@ -29,6 +29,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'go';
 if (!function_exists($funcName)) {
+    /**
+     * @param array<int, string> $backtrace
+     */
     function go(array $backtrace = [], int $level = 1): string
     {
         $backtrace = ($backtrace)

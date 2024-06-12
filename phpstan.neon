@@ -1,4 +1,8 @@
 parameters:
+    excludePaths:
+        - 'packages/ironwoods/Helpers/vendor/*'
+        - 'packages/ironwoods/Services/vendor/*'
+        - 'vendor/*'
     ignoreErrors:
         - '#Function dump invoked with [0-9]+ parameter, 0 required.#'
         - '#Function dd invoked with [0-9]+ parameter, 0 required.#'
