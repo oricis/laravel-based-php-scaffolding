@@ -19,8 +19,12 @@ if (!function_exists($funcName)) {
 
 $funcName = 'isOutOFYear';
 if (!function_exists($funcName)) {
-    function isOutOFYear(int $year, string $date): bool
+    function isOutOFYear(
+        int $year,
+        string $date,
+        string $separator = '-'
+    ): bool
     {
-        return $year !== getYearFromDate($date);
+        return $year !== getYearFromDate($date, $separator);
     }
 }
