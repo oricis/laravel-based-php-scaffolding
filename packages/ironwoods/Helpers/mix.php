@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 $funcName = 'isEmpty';
 if (!function_exists($funcName)) {
-    function isEmpty($value): bool
+    function isEmpty(mixed $value): bool
     {
         if (!is_numeric($value)
             && empty($value)) {

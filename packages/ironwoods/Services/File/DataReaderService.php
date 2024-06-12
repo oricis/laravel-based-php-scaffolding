@@ -43,7 +43,9 @@ class DataReaderService
             }
 
             while (!feof($fileToRead) ) {
-                $output[] = fgetcsv($fileToRead, 2000, $separator);
+                if ($row = fgetcsv($fileToRead, 2000, $separator)) {
+                    $output[] = $row;
+                }
             }
             fclose($fileToRead);
 
@@ -51,7 +53,7 @@ class DataReaderService
             error(go() . ' >> ' . getExceptionStr($e));
         }
 
-        return removeArrEmpties($output);
+        return removeArrayEmpties($output);
     }
 
     /**
@@ -71,6 +73,6 @@ class DataReaderService
             error(go() . ' >> ' . getExceptionStr($e));
         }
 
-        return removeArrEmpties($output);
+        return removeArrayEmpties($output);
     }
 }

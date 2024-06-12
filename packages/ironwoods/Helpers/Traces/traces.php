@@ -5,28 +5,34 @@ declare(strict_types=1);
 
 $funcName = 'error';
 if (!function_exists($funcName)) {
-	function error(string $message, $data = null): void
-	{
-		dd('<p class="b cred">' . $message . '</p>', $data);
-	}
+    function error(string $message, mixed $data = null): void
+    {
+        dd('<p class="b cred">' . $message . '</p>', $data);
+    }
 }
 
 $funcName = 'getExceptionStr';
 if (!function_exists($funcName)) {
     function getExceptionStr(\Exception $exception): string
     {
+        if (! defined('APP_NAME')) {
+            define('APP_NAME', null);
+        }
         $dateTime = date('d-m-Y - h:m:s');
 
-        return $dateTime . defined('APP_NAME') ? (' - ' . APP_NAME) : ''
-            . '<br>File: ' . $exception->getFile() . PHP_EOL
-            . ' / Line: ' . $exception->getLine() . PHP_EOL
-            . '<br>Exception: ' . $exception->getMessage();
+        return $dateTime . ((APP_NAME) ? (' - ' . APP_NAME) : '')
+            . PHP_EOL . 'File: ' . $exception->getFile() . PHP_EOL
+            . ' / Line: ' . $exception->getLine() . PHP_EOL . PHP_EOL
+            . 'Exception: ' . $exception->getMessage();
     }
 }
 
 $funcName = 'go';
 if (!function_exists($funcName)) {
-	function go(array $backtrace = [], int $level = 1): string
+    /**
+     * @param array<int, string> $backtrace
+     */
+    function go(array $backtrace = [], int $level = 1): string
     {
         $backtrace = ($backtrace)
             ? $backtrace
@@ -45,33 +51,36 @@ if (!function_exists($funcName)) {
 
 $funcName = 'logger';
 if (!function_exists($funcName)) {
-	function logger(string $message, string $level = 'warn'): void
-	{
-		if (! defined('LOGS_STORAGE')) {
-			define('LOGS_STORAGE', null);
-			return;
-		}
+    function logger(string $message, string $level = 'warn'): void
+    {
+        if (! defined('LOGS_STORAGE')) {
+            define('LOGS_STORAGE', null);
+            return;
+        }
 
-		$level = trim(strtoupper($level));
-		if ($level === 'WARN') {
-			$level = 'WARNING';
-		}
-		$message = $level . ': ' . $message;
-		$dateTime = date('d-m-Y - h:m:s');
-		$today = date('d_m_Y');
+        $level = trim(strtoupper($level));
+        if ($level === 'WARN') {
+            $level = 'WARNING';
+        }
+        $message = $level . ': ' . $message;
+        $dateTime = date('d-m-Y - h:m:s');
+        $today = date('d_m_Y');
 
-		file_put_contents(
-			LOGS_STORAGE . $today . '.md',
-			$dateTime . ' > ' . $message . PHP_EOL,
-			FILE_APPEND
-		);
-	}
+        $filePath = LOGS_STORAGE . $today . '.md';
+        if (!file_put_contents(
+            $filePath,
+            $dateTime . ' > ' . $message . PHP_EOL,
+            FILE_APPEND
+        )) {
+            error('Log failing, path: ' . $filePath);
+        }
+    }
 }
 
 $funcName = 'warn';
 if (!function_exists($funcName)) {
-	function warn(string $message): void
-	{
-		logger($message . '<br>', 'warn');
-	}
+    function warn(string $message): void
+    {
+        logger($message . '<br>', 'warn');
+    }
 }

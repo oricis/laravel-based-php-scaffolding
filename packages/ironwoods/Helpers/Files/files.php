@@ -5,6 +5,9 @@ declare(strict_types=1);
 
 $funcName = 'getFilePaths';
 if (!function_exists($funcName)) {
+    /**
+     * @return array<int, string>
+     */
     function getFilePaths(
         string $directoryPath,
         string $fileExtension = 'php',
@@ -21,7 +24,8 @@ if (!function_exists($funcName)) {
                 while ($temp = readdir($resource)) {
                     if ($temp === '.'
                         || $temp === '..'
-                        || !str_contains($temp, '.' . $fileExtension)) {
+                        || ($fileExtension
+                            && !str_contains($temp, '.' . $fileExtension))) {
                         continue;
                     }
 
@@ -47,6 +51,9 @@ if (!function_exists($funcName)) {
 
 $funcName = 'existsDirectories';
 if (!function_exists($funcName)) {
+    /**
+     * @param array<int, string> $directoryPaths
+     */
     function existsDirectories(array $directoryPaths): bool
     {
         $flag = true;
@@ -58,5 +65,24 @@ if (!function_exists($funcName)) {
         }
 
         return $flag;
+    }
+}
+
+$funcName = 'removeFiles';
+if (!function_exists($funcName)) {
+    /**
+     * @param array<int, string> $fileExtensions
+     */
+    function removeFiles(string $path, array $fileExtensions): bool
+    {
+        if ($logFiles = getFilePaths($path)) {
+            foreach ($logFiles as $path) {
+                if (!unlink($path)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

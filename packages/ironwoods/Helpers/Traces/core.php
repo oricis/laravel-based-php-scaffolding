@@ -5,11 +5,14 @@ declare(strict_types=1);
 
 $funcName = 'dd';
 if (!function_exists($funcName)) {
-	function dd(): void
-	{
-		dump(func_get_args());
-		die();
-	}
+    function dd(): void
+    {
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            dump($arg);
+        }
+        die();
+    }
 } else {
     echo 'ERR: function "' . $funcName . '" already defined!';
     die();
@@ -17,34 +20,81 @@ if (!function_exists($funcName)) {
 
 $funcName = 'dump';
 if (!function_exists($funcName)) {
-	function dump(): void
-	{
-		$lineBreak = getLineBreak();
-		foreach (func_get_args() as $arg) {
-			if (is_array($arg)) {
-				foreach ($arg as $key => $value) {
-					if (is_numeric($value) || is_string($value)) {
-						echo $key . ' => ' . $value . $lineBreak;
-						continue;
-					}
-					if (is_array($value)) {
-						dump($value);
-						continue;
-					}
+    /**
+     * @param array<int|string, mixed> $arr
+     */
+    function dumpArr(array $arr, int $indentation = 4): void
+    {
+        if (empty($arr)) {
+            echo '[]' . getLineBreak();
+            return;
+        }
+        $indent = '';
+        while ($indentation) {
+            $indentation--;
+            $indent .= ' ';
+        }
 
-					print_r($value);
-					echo $lineBreak;
-				}
-			} else {
-				if (is_string($arg) || is_numeric($arg)) {
-					echo $arg . $lineBreak;
-					continue;
-				}
-				var_dump($arg);
-			}
-			echo $lineBreak;
-		}
-	}
+        echo 'array(' . count($arr) . ') => [' . getLineBreak();
+        foreach ($arr as $key => $value) {
+            if (is_numeric($value) || is_string($value)) {
+                echo $indent . $key . ' => ' . $value . ',' . getLineBreak();
+                continue;
+            }
+            if (is_array($value)) {
+                if (empty($value)) {
+                    echo $indent . $key . ' => [],' . getLineBreak();
+                    continue;
+                }
+                $arrValues = [];
+
+                echo $indent . $key . ' => Array(' . count($value) . '):[';
+                foreach ($value as $key => $internalValue) {
+                    if (is_array($internalValue)) {
+                        echo 'Array(' . count($internalValue) . '):[' . implode(',' , $internalValue) . '], ';
+                        continue;
+                    }
+                    $arrValues[] = $internalValue;
+                }
+                echo implode(',' , $arrValues) . '],' . getLineBreak();
+            }
+
+            // print_r($value);
+            // echo getLineBreak();
+        }
+        echo ']' . getLineBreak();
+    }
+
+    function dumpStr(string $str): void
+    {
+        if (empty(trim($str))) {
+            echo '"" (' . strlen($str) . ')' . getLineBreak();
+            return;
+        }
+
+        echo $str . getLineBreak();
+    }
+
+    function dump(): void
+    {
+        foreach (func_get_args() as $key => $arg) {
+            if (is_array($arg)) {
+                dumpArr($arg);
+                continue;
+            }
+            if (is_string($arg)) {
+                dumpStr($arg);
+                continue;
+            }
+            if (is_numeric($arg)) {
+                echo $arg . getLineBreak();
+                continue;
+            }
+
+            var_dump($arg);
+            echo getLineBreak();
+        }
+    }
 } else {
     echo 'ERR: function "' . $funcName . '" already defined!';
     die();
@@ -52,16 +102,12 @@ if (!function_exists($funcName)) {
 
 $funcName = 'getLineBreak';
 if (!function_exists($funcName)) {
-	function getLineBreak()
-	{
-		$backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-		$origin = $backtrace[1]['file'];
-		if (str_contains($origin, 'tests')) {
-			return PHP_EOL;
-		}
-
-		return '<br>';
-	}
+    function getLineBreak(): string
+    {
+        return (php_sapi_name() === 'cli')
+            ? PHP_EOL
+            : '<br>';
+    }
 } else {
     echo 'ERR: function "' . $funcName . '" already defined!';
     die();
