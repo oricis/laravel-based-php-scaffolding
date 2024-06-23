@@ -37,7 +37,7 @@ By convenience, you can now rename your project directory and
 
 Check code with PHPStan (app & public on max level):
 
-    ./vendor/bin/phpstan analyze --level 9 public app
+    ./vendor/bin/phpstan analyze --level 9 public app config
 
 To run the unitary tests use:
 
