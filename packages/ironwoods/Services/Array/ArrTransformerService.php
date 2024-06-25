@@ -14,6 +14,9 @@ declare(strict_types = 1);
 
 namespace Ironwoods\Services\Array;
 
+use Ironwoods\Enums\SortOption;
+use Ironwoods\Exceptions\RequiredActionException;
+
 final class ArrTransformerService
 {
 
@@ -41,5 +44,39 @@ final class ArrTransformerService
         }
 
         return $arr;
+    }
+
+    /**
+     * Sort the internal arrays by the given key
+     *
+     * @param array<int, array<int, mixed>> $rows
+     * @return array<int, array<int, mixed>>
+     */
+    public static function sortNestedArraysByKey(
+        array $arr,
+        int $keyToSort = 0,
+        SortOption $sortOption = SortOption::ASC
+    ): array
+    {
+        $arr = removeArrayEmpties($arr);
+        $output = [];
+
+        try {
+            $column = array_column($arr, $keyToSort);
+            if ($sortOption === SortOption::ASC) {
+                asort($column);
+            } else {
+                arsort($column);
+            }
+
+            foreach($column as $key => $value) {
+                $output[] = $arr[$key];
+            }
+
+        } catch (RequiredActionException ) {
+            echo 'ERROR ordenando';
+        }
+
+        return $output;
     }
 }

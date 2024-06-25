@@ -1,0 +1,25 @@
+{
+    "name": "ironwoods/enums",
+    "description": "PHP enums collection",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1"
+    },
+    "authors": [
+        {
+            "name": "Moisés Alcocer",
+            "homepage": "https://www.ironwoods.es"
+        }
+    ]
+}
