@@ -147,9 +147,11 @@ if (!function_exists($funcName)) {
     ): array
     {
         $filteredArr = array_filter($arr, function ($value) {
-            return ((is_numeric($value)
-                || is_string($value)
+            return ((is_array($value)
+                || is_numeric($value)
                 || is_object($value)
+                || is_resource($value)
+                || is_string($value)
                 ) && $value);
         });
 

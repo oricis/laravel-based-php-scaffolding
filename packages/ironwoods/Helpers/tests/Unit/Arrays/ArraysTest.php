@@ -83,6 +83,32 @@ class ArraysTest extends TestCase
         $this->assertNotEquals($expected, $result);
     }
 
+    public function test_remove_array_empty_values_with_multidimensional_array(): void
+    {
+        // @removeArrayEmpties(array $arr, bool $reindex = true): array
+
+        $arr = [
+            null,
+            ['Date', 'Amount', 'Value'],
+            ['12-01-2021', 1000, 34],
+            ['13-01-2021', 2000, 100],
+            ['17-01-2021', 300, 3114],
+            [],
+        ];
+        $expected = [
+            ['Date', 'Amount', 'Value'],
+            ['12-01-2021', 1000, 34],
+            ['13-01-2021', 2000, 100],
+            ['17-01-2021', 300, 3114],
+        ];
+
+        $result = removeArrayEmpties($arr, true);
+        $this->assertEquals($expected, $result);
+
+        $result = removeArrayEmpties($arr, false); // no reindex
+        $this->assertNotEquals($expected, $result);
+    }
+
     public function test_array_keys_preservation(): void
     {
         // @preserveArrayKeys(array $arr, array $keysToSave): array
