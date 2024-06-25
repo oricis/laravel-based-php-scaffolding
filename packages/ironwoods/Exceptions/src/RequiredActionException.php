@@ -4,7 +4,7 @@ namespace Ironwoods\Exceptions;
 
 use Exception;
 
-final class RequireActionException extends Exception
+final class RequiredActionException extends Exception
 {
 
     public function __construct(
