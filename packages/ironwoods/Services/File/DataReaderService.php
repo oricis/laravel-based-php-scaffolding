@@ -16,7 +16,7 @@ namespace Ironwoods\Services\File;
 
 use Ironwoods\Exceptions\FileNotFoundException;
 use Ironwoods\Exceptions\FileReadException;
-use Ironwoods\Exceptions\RequireActionException;
+use Ironwoods\Exceptions\RequiredActionException;
 
 class DataReaderService
 {
@@ -39,7 +39,7 @@ class DataReaderService
             $fileToRead = fopen($filename, 'r');
             if (! $fileToRead) {
                 $message = 'No se ha abierto el fichero: ' . $filename;
-                throw new RequireActionException($message);
+                throw new RequiredActionException($message);
             }
 
             while (!feof($fileToRead) ) {

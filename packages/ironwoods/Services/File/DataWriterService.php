@@ -14,7 +14,7 @@ declare(strict_types = 1);
 
 namespace Ironwoods\Services\File;
 
-use Ironwoods\Exceptions\RequireActionException;
+use Ironwoods\Exceptions\RequiredActionException;
 
 class DataWriterService
 {
@@ -32,7 +32,7 @@ class DataWriterService
             $file = fopen($path, 'w'); // Open a file in write mode ('w')
             if (!$file) {
                 $message = 'NO se ha abierto/creado el fichero: ' . $path;
-                throw new RequireActionException($message);
+                throw new RequiredActionException($message);
             }
             foreach ($rows as $row) {
                 if ($removeCancelled
@@ -59,7 +59,7 @@ class DataWriterService
             $file = fopen($path, 'w'); // Open a file in write mode ('w')
             if (!$file) {
                 $message = 'NO se ha abierto/creado el fichero: ' . $path;
-                throw new RequireActionException($message);
+                throw new RequiredActionException($message);
             }
             foreach ($rows as $row) {
                 fwrite($file, $row . PHP_EOL);

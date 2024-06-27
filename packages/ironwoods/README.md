@@ -61,7 +61,7 @@ file (assuming that the entry file is "public/index.php"):
       │  │  ├─ FileNotFoundException.php
       │  │  ├─ FileReadException.php
       │  │  ├─ NotBetweenException.php
-      │  │  ├─ RequireActionException.php
+      │  │  ├─ RequiredActionException.php
       │  │  └─ RequiredDataException.php
       │  └─ tests/
       ├─ Helpers/
