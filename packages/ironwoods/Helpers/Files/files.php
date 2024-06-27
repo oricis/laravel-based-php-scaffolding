@@ -73,11 +73,16 @@ if (!function_exists($funcName)) {
     /**
      * @param array<int, string> $fileExtensions
      */
-    function removeFiles(string $path, array $fileExtensions): bool
+    function removeFiles(string $path, array $fileExtensions = []): bool
     {
         if ($logFiles = getFilePaths($path)) {
             foreach ($logFiles as $path) {
-                if (!unlink($path)) {
+                if ($fileExtensions
+                    && !in_array(getLastSlice($path, '.'), $fileExtensions, true)) {
+                    continue;
+                }
+
+                if(!unlink($path)) {
                     return false;
                 }
             }

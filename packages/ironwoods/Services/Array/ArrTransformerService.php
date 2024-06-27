@@ -49,8 +49,8 @@ final class ArrTransformerService
     /**
      * Sort the internal arrays by the given key
      *
-     * @param array<int, array<int, mixed>> $rows
-     * @return array<int, array<int, mixed>>
+     * @param array<int, array<int, mixed>|null> $arr
+     * @return array<int<0, max>, mixed>
      */
     public static function sortNestedArraysByKey(
         array $arr,
