@@ -18,6 +18,19 @@ use Ironwoods\Exceptions\RequiredActionException;
 
 class DataWriterService
 {
+
+    public static function composeFilePath(
+        string $originalFilePath,
+        string $fragment = '-chunk'
+    ): string
+    {
+        $slice = getLastSlice($originalFilePath, DIRECTORY_SEPARATOR);
+        $fileExtension = '.' . getLastSlice($slice, '.');
+        $newFileName = str_replace($fileExtension, $fragment . $fileExtension, $slice);
+
+        return str_replace($slice, $newFileName, $originalFilePath);
+    }
+
     /**
      * @param array<int, array<int|string,bool|float|int|string|null>> $rows
      */
