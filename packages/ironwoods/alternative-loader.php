@@ -5,6 +5,8 @@
  *
  */
 
+use Ironwoods\Exceptions\RequiredActionException;
+
 require_once __DIR__ . "/Helpers/loader.php";
 
 if (!function_exists('loadClasses')) {
@@ -15,7 +17,8 @@ if (!function_exists('loadClasses')) {
         }
 
         try {
-            if ($resource = opendir($directoryPath)) {
+            $resource = opendir($directoryPath);
+            if ($resource) {
                 while ($temp = readdir($resource)) {
                     if ($temp === '.'
                         || $temp === '..'
@@ -24,9 +27,11 @@ if (!function_exists('loadClasses')) {
                     }
                     require_once $directoryPath . $temp;
                 }
-            } else {
-                error('Something was bad opening the directory !!!');
             }
+
+            $message = 'Something was bad opening the directory !!!';
+            throw new RequiredActionException($message);
+
         } catch (\Exception $e) {
             error(getExceptionStr($e));
             return false;

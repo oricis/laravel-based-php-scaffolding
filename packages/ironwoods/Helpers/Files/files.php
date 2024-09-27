@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Ironwoods\Exceptions\RequiredActionException;
 
 $funcName = 'getFilePaths';
 if (!function_exists($funcName)) {
@@ -20,7 +21,8 @@ if (!function_exists($funcName)) {
 
         $output = [];
         try {
-            if ($resource = opendir($directoryPath)) {
+            $resource = opendir($directoryPath);
+            if ($resource) {
                 while ($temp = readdir($resource)) {
                     if ($temp === '.'
                         || $temp === '..'
@@ -33,19 +35,22 @@ if (!function_exists($funcName)) {
                         if (str_contains($temp, 'grouped')) {
                             $output[] = $temp;
                         }
-                    } else {
-                        $output[] = $temp;
+                        continue;
                     }
+
+                    $output[] = $temp;
                 }
-            } else {
-                error('Something was bad opening the directory !!!');
+
+                return $output;
             }
+
+            $message = 'Something was bad opening the directory !!!';
+            throw new RequiredActionException($message);
+
         } catch (\Exception $e) {
             error(getExceptionStr($e));
-            $output = [];
+            return [];
         }
-
-        return $output;
     }
 }
 
@@ -75,7 +80,8 @@ if (!function_exists($funcName)) {
      */
     function removeFiles(string $path, array $fileExtensions = []): bool
     {
-        if ($logFiles = getFilePaths($path)) {
+        $logFiles = getFilePaths($path);
+        if ($logFiles) {
             foreach ($logFiles as $path) {
                 if ($fileExtensions
                     && !in_array(getLastSlice($path, '.'), $fileExtensions, true)) {

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use \Random\Randomizer;
+
 
 $funcName = 'getLastSlice';
 if (!function_exists($funcName)) {
@@ -96,11 +98,11 @@ if (!function_exists($func)) {
 
         // Since PHP 8.3
         if (method_exists('\Random\Randomizer', 'getBytesFromString')) {
+
             // A \Random\Engine may be passed for seeding,
             // the default is the secure engine.
-            $randomizer = new \Random\Randomizer();
 
-            return $randomizer->getBytesFromString($chars, $length);
+            return (new Randomizer())->getBytesFromString($chars, $length);
         }
 
         $charsLength = strlen($chars);

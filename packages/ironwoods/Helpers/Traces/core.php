@@ -42,27 +42,33 @@ if (!function_exists($funcName)) {
                 continue;
             }
             if (is_array($value)) {
-                if (empty($value)) {
-                    echo $indent . $key . ' => [],' . getLineBreak();
-                    continue;
-                }
-                $arrValues = [];
-
-                echo $indent . $key . ' => Array(' . count($value) . '):[';
-                foreach ($value as $key => $internalValue) {
-                    if (is_array($internalValue)) {
-                        echo 'Array(' . count($internalValue) . '):[' . implode(',' , $internalValue) . '], ';
-                        continue;
-                    }
-                    $arrValues[] = $internalValue;
-                }
-                echo implode(',' , $arrValues) . '],' . getLineBreak();
+                dumpArrAuxActions($key, $value, $indent);
             }
-
-            // print_r($value);
-            // echo getLineBreak();
         }
         echo ']' . getLineBreak();
+    }
+
+    /**
+     * @param array<mixed, mixed> $arr
+     */
+    function dumpArrAuxActions(mixed $key, array $arr, string $indent): void
+    {
+        if (empty($arr)) {
+            echo $indent . $key . ' => [],' . getLineBreak();
+            return;
+        }
+        echo $indent . $key . ' => Array(' . count($arr) . '):[';
+
+        $arrValues = [];
+        foreach ($arr as $key => $internalValue) {
+            if (is_array($internalValue)) {
+                echo 'Array(' . count($internalValue) . '):[' . implode(',' , $internalValue) . '], ';
+                return;
+            }
+            $arrValues[] = $internalValue;
+        }
+
+        echo implode(',' , $arrValues) . '],' . getLineBreak();
     }
 
     function dumpStr(string $str): void

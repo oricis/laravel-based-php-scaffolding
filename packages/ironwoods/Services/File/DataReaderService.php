@@ -43,7 +43,8 @@ class DataReaderService
             }
 
             while (!feof($fileToRead) ) {
-                if ($row = fgetcsv($fileToRead, 2000, $separator)) {
+                $row = fgetcsv($fileToRead, 2000, $separator);
+                if ($row) {
                     $output[] = $row;
                 }
             }

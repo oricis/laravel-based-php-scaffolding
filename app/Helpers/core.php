@@ -68,8 +68,8 @@ if (! function_exists($funcName)) {
             throw new FileNotFoundException($message);
         }
 
-        if (($content = file($filepath))
-            && is_array($content)) {
+        $content = file($filepath);
+        if (is_array($content)) {
             $value = null;
             foreach ($content as $value) {
                 if (strpos($value, $key) === 0) {
