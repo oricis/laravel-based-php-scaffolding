@@ -1,4 +1,5 @@
 storage/logs/
+storage/output/phpmd.json
 vendor/
 version.*
 .git/

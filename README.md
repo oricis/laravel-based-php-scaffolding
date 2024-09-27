@@ -35,14 +35,48 @@ By convenience, you can now rename your project directory and
 
 ## Run checks/tests
 
-Check code with PHPStan (app & public on max level):
+### Check code with PHPStan
 
-    ./vendor/bin/phpstan analyze --level 9 public app config
+Run the command (app & public, max level is 9):
 
-To run the unitary tests use:
+    ./vendor/bin/phpstan analyze --level 5 public app config
+
+You can start with a intermediate level, as 5 and increase the level after
+the necessary corrections.
+
+PHPStan doc: https://phpstan.org/user-guide/getting-started
+
+### Check code with PHP Mesh Detector
+
+Run the command:
+
+    composer run phpmd
+
+If no mesh code is detected the terminal show code 0, in other cases
+check the output file: "storage/output/phpmd.json"
+
+NOTE: the command is set in the composer.json file (section "scripts") and
+it's using the "cleancode,codesize,unusedcode,naming" rulesets to analize the code,
+you can use one or var of them.
+
+Available rulesets:
+<ul>
+    <li><a target="_self" href="http://phpmd.org/rules/cleancode.html">cleancode</a></li>
+    <li><a target="_self" href="http://phpmd.org/rules/codesize.html">codesize</a></li>
+    <li><a target="_self" href="http://phpmd.org/rules/controversial.html">controversial</a></li>
+    <li><a target="_self" href="http://phpmd.org/rules/design.html">design</a></li>
+    <li><a target="_self" href="http://phpmd.org/rules/naming.html">naming</a></li>
+    <li><a target="_self" href="http://phpmd.org/rules/unusedcode.html">unusedcode</a></li>
+</ul>
+
+PHP Mesh Detector doc: https://phpmd.org/documentation/index.html
+
+### Run unitary test (PHPUnit)
 
     vendor/bin/phpunit tests/Unit/Services/ChocoBilly --color
     vendor/bin/phpunit tests/Unit/Services/DnaChocobos --color
+
+PHPUnit doc: https://phpunit.de/documentation.html
 
 ***
 
