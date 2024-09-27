@@ -13,6 +13,15 @@ if (!function_exists($funcName)) {
     }
 }
 
+$func = 'json_validate';  // NOTE: before PHP8.3
+if (!function_exists($func)) {
+    function json_validate(string $string): bool {
+        json_decode($string);
+
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+}
+
 $func = 'normalizeChars';
 if (!function_exists($func)) {
     function normalizeChars(string $str):? string
@@ -84,6 +93,16 @@ if (!function_exists($func)) {
         $chars = ($chars)
             ? $chars
             : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Since PHP 8.3
+        if (method_exists('\Random\Randomizer', 'getBytesFromString')) {
+            // A \Random\Engine may be passed for seeding,
+            // the default is the secure engine.
+            $randomizer = new \Random\Randomizer();
+
+            return $randomizer->getBytesFromString($chars, $length);
+        }
+
         $charsLength = strlen($chars);
 
         $output = '';
